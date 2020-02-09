@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import lt.bit.java.datamodel.Contact;
 
 /**
  *
@@ -27,17 +28,25 @@ public class ListPersons {
         p1.setId(1);
         p1.setFirstName("Zmogas");
         p1.setLastName("Zmogeliukas");
-        p1.setAge(new Integer(25));
+        p1.setAge(25);
         p1.setSalary(new BigDecimal(2000));
         p1.setBirthDate(new Date());
+        
         PERSONS.add(p1);
-
+        
+        Contact c1 = new Contact();
+        c1.setId(1);
+        c1.setContact("mail@mail.lt");
+        c1.setType("Email");
+        
+        p1.getContacts().getListItems().add(c1);
+        
 
         p1 = new Person();
         p1.setId(2);
         p1.setFirstName("Papuga");
         p1.setLastName("Papugiukas");
-        p1.setAge(new Integer(23));
+        p1.setAge(23);
         p1.setSalary(new BigDecimal(0));
         p1.setBirthDate(new Date());
          
@@ -53,12 +62,17 @@ public class ListPersons {
         d2.setCity("Vilnius");
         d2.setPostalCode("kapines");
         
-        p1.getAddresses().add(d1);
-        p1.getAddresses().add(d2);
+        p1.getAddresses().getListItems().add(d1);
+        p1.getAddresses().getListItems().add(d2);
+        
+        c1 = new Contact();
+        c1.setId(2);
+        c1.setContact("865278208");
+        c1.setType("Mobile");
+        
+        p1.getContacts().getListItems().add(c1);
         
         PERSONS.add(p1);
-        
-        
     }
     
     public static List<Person> getListItems() {
@@ -67,6 +81,38 @@ public class ListPersons {
     
     public static int getNextId() {
         return PERSONS.size() + 1;
+    }
+    
+    /***
+     * Calculate next id for new address object
+     * Iterated all persons to sum how many addresses contains
+     * 
+     * @return 
+     */
+    public static int getNextAddressId() {
+        int nextId = 0;
+        
+        for (Person p : PERSONS) {
+            nextId += p.getAddresses().getListItems().size();
+        }
+        
+        return nextId + 1;
+    }
+    
+    /***
+     * Calculate next id for new contact object
+     * Iterated all persons to sum how many contacts contains
+     * 
+     * @return 
+     */
+    public static int getNextContactId() {
+        int nextId = 0;
+        
+        for (Person p : PERSONS) {
+            nextId += p.getContacts().getListItems().size();
+        }
+        
+        return nextId + 1;
     }
     
     public static Person getPerson(Integer id) {
@@ -86,7 +132,7 @@ public class ListPersons {
     public static void savePerson(Person p) {
         if (!PERSONS.contains(p)) {
             PERSONS.add(p);
-        } else {
+        } else {    
             updatePerson(p);
         }
     }
@@ -123,5 +169,5 @@ public class ListPersons {
         if (found >= 0) {
             PERSONS.remove(found);
         }
-    }   
+    }
 }

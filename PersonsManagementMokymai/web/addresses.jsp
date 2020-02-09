@@ -17,43 +17,63 @@
             if (request.getParameter("person_id") != null) {
                 Integer personId = new Integer(request.getParameter("person_id"));
                 p = ListPersons.getPerson(personId);
-            } 
-            %>
-        <h1>Addresses</h1>
-        <br>
-        <br>
-        <table border="1" style="width:100%; border: 1px solid #00cccc;">
+            }
+        %>
+        <h1>Addresses (<%=p.getAddresses().getListItems().size()%>)</h1>
+        <h3>Person: <%=p.getFirstName()+" "+p.getLastName()%></h3>
+        
+        <table border="0" style="width:100%; border: 1px solid #00cccc;">
             <tr>
-                <td><strong>Person: </strong></td>
-                <td><%=p.getFirstName()%></td>
-                <td><%=p.getLastName()%></td>
+                <td colspan="2">
+                    <table border="1" style="width:100%; border: 1px solid #00cccc;">
+                        <tr>
+                            <th>ID</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Postal Code</th>
+                            <th colspan="2">Actions</th>
+                        </tr>
+                        <% for (Address addr : p.getAddresses().getListItems()) {%>
+                        <tr>
+                            <td><%=addr.getId()%></td>
+                            <td><%=addr.getAddress()%></td>
+                            <td><%=addr.getCity()%></td>
+                            <td><%=addr.getPostalCode()%></td>
+                            <td style="width: 80px;">
+                                <form action="view" method="GET">
+                                    <input type="hidden" name="id" value="<%=addr.getId()%>">
+                                    <input type="hidden" name="page_url" value="form-address.jsp?person_id=<%=p.getId()%>&id=<%=addr.getId()%>">
+                                    <input type="submit" name="btn_action" value="Edit">
+                                </form>
+                            </td>
+                            <td style="width: 80px;">
+                                <form action="removeAddress" method="POST">
+                                    <input type="hidden" name="person_id" value="<%=p.getId()%>">
+                                    <input type="hidden" name="id" value="<%=addr.getId()%>">
+                                    <input type="hidden" name="redirect_url" value="addresses.jsp?person_id=<%=p.getId()%>">
+                                    <input type="submit" name="btn_remove" value="Remove">
+                                </form>
+                            </td>
+                        </tr>
+                        <% }%>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:100px;">
+                    <form action="view" method="GET">
+                        <input type="hidden" name="page_url" value="form-address.jsp?person_id=<%=p.getId()%>">
+                        <input type="submit" name="btn_back" value="Add">
+                    </form>
+                </td>
+                <td>
+                    <form action="view" method="GET">
+                        <input type="hidden" name="page_url" value="index.jsp">
+                        <input type="submit" name="btn_back" value="Back">
+                    </form>
+                </td>
             </tr>
         </table>
-        <form action="addresses" method="POST">
-            <table border="1" style="width:100%; border: 1px solid #00cccc;">
-                <% for (Address addr : p.getAddresses()) { %>
-                <tr>
-                    <td>Address: </td>
-                    <td><%=addr.getId()%></td>
-                    <td><%=addr.getAddress()%></td>
-                    <td><%=addr.getCity()%></td>
-                    <td><%=addr.getPostalCode()%></td>
-                    <td colspan="2">Actions</td>
-                    <td><input type="submit" name="btnAddAddress" value="Edit"></td>
-                    <td><input type="submit" name="btnBack" value="Delete"></td>
-                </tr>
-                <% } %>
-            </table>
-        </form>
-            
-        <form action="view" method="GET">
-            <input type="hidden" name="page_url" value="form-address.jsp?person_id=<%=p.getId()%>">
-            <input type="submit" name="btn_back" value="Add">
-        </form>            
-            
-        <form action="view" method="GET">
-            <input type="hidden" name="page_url" value="index.jsp">
-            <input type="submit" name="btn_back" value="Back">
-        </form>
     </body>
 </html>

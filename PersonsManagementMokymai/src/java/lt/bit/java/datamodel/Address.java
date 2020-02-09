@@ -6,6 +6,9 @@
 
 package lt.bit.java.datamodel;
 
+import java.util.Objects;
+import lt.bit.java.services.ListPersons;
+
 /**
  *
  * @author Bronius
@@ -15,6 +18,10 @@ public class Address {
     private String address;
     private String city;
     private String postalCode;
+    
+    public Address() {
+        this.id = ListPersons.getNextAddressId();
+    }
 
     public Integer getId() {
         return id;
@@ -48,7 +55,26 @@ public class Address {
         this.postalCode = postalCode;
     }
     
-    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        
+        if (this == null) {
+            return false;
+        }
+        
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        
+        final Address other = (Address) o;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }
 
 

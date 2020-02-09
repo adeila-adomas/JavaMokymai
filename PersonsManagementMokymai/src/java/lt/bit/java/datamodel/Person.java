@@ -6,12 +6,11 @@
 package lt.bit.java.datamodel;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
+import lt.bit.java.services.ListAddresses;
+import lt.bit.java.services.ListContacts;
 import lt.bit.java.services.ListPersons;
-
 
 public class Person {
     
@@ -22,30 +21,14 @@ public class Person {
     private Date birthDate;
     private BigDecimal salary = new BigDecimal(0);
     
-    private List<Address> addresses;
-    private List<Contact> contacts;
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
-    }
-        
+    private ListAddresses addresses;
+    private ListContacts contacts;
+            
     public Person() {
         this.id = ListPersons.getNextId();
         
-        this.addresses = new ArrayList<>();
-        this.contacts = new ArrayList<>();
+        this.addresses = new ListAddresses();
+        this.contacts = new ListContacts();
     }
     
     @Override
@@ -120,6 +103,22 @@ public class Person {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+    
+    public ListAddresses getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(ListAddresses addresses) {
+        this.addresses = addresses;
+    }
+
+    public ListContacts getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(ListContacts contacts) {
+        this.contacts = contacts;
     }
     
 }

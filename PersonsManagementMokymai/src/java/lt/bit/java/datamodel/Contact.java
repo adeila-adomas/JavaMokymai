@@ -5,6 +5,9 @@
  */
 package lt.bit.java.datamodel;
 
+import java.util.Objects;
+import lt.bit.java.services.ListPersons;
+
 /**
  *
  * @author Bronius
@@ -13,6 +16,10 @@ public class Contact {
     private Integer id;
     private String type;
     private String contact;
+    
+    public Contact() {
+        this.id = ListPersons.getNextContactId();
+    }
 
     public Integer getId() {
         return id;
@@ -36,6 +43,27 @@ public class Contact {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        
+        if (this == null) {
+            return false;
+        }
+        
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        
+        final Contact other = (Contact) o;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
     
     

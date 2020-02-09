@@ -6,8 +6,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.math.BigDecimal"%>
-<%@page import="lt.bit.java.Person" %>
-<%@page import="lt.bit.java.ListPersons" %>
+<%@page import="lt.bit.java.datamodel.Person" %>
+<%@page import="lt.bit.java.services.ListPersons" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
                 p = new Person();
             }
             %>
-        <form action="save" method="post">
+        <form action="savePerson" method="post">
             <table style="width:100%; border:1px solid #ccccff;">
             <tr>
                 <td>ID:</td>

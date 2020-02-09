@@ -1,7 +1,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="lt.bit.java.datamodel.Person" %>
-<%@page import="lt.bit.java.ListPersons" %>
+<%@page import="lt.bit.java.services.ListPersons" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,8 +26,7 @@
                 <th>Age</th>
                 <th>Birth date</th>
                 <th>Salary</th>
-                <th colspan="2">Actions</th>
-                <th colspan="2">&nbsp;</th>
+                <th colspan="4">Actions</th>
             </tr>
             <% for (Person per : ListPersons.getListItems()) { %>
             <tr>
@@ -42,13 +41,14 @@
                 %></td>
                 <td><%=per.getSalary()%></td>
                 <td style="width: 80px;">
-                    <form action="view" method="POST">
+                    <form action="view" method="GET">
                         <input type="hidden" name="id" value="<%=per.getId()%>">
+                        <input type="hidden" name="page_url" value="form-person.jsp?id=<%=per.getId()%>">
                         <input type="submit" name="btn_action" value="Edit">
                     </form>
                 </td>
                 <td style="width: 80px;">
-                    <form action="remove" method="POST">
+                    <form action="removePerson" method="POST">
                         <input type="hidden" name="id" value="<%=per.getId()%>">
                         <input type="submit" name="btn_remove" value="Remove">
                     </form>
@@ -56,15 +56,16 @@
                 <td style="width: 80px;">
                     <form action="view" method="POST">
                         <input type="hidden" name="page_url" value="addresses.jsp?person_id=<%=per.getId()%>">
-                        <input type="submit" name="btn_action" value="Addresses">
+                        <input type="submit" name="btn_action" value="View Addresses (<%=per.getAddresses().getListItems().size() %>) ">
                     </form>
                 </td>
                 <td style="width: 80px;">
                     <form action="view" method="GET">
                         <input type="hidden" name="page_url" value="contacts.jsp?person_id=<%=per.getId()%>">
-                        <input type="submit" name="btn_action" value="Contacts">
+                        <input type="submit" name="btn_action" value="View Contacts (<%=per.getContacts().getListItems().size() %>)">
                     </form>
                 </td>
+                
             </tr>
             <% } %>
         </table>

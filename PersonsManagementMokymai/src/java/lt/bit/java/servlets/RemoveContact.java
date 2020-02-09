@@ -17,8 +17,8 @@ import lt.bit.java.services.ListPersons;
  *
  * @author adoma
  */
-@WebServlet(name = "RemovePersonServlet", urlPatterns = {"/removePerson"})
-public class RemovePersonServlet extends HttpServlet {
+@WebServlet(name = "RemoveContact", urlPatterns = {"/removeContact"})
+public class RemoveContact extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,9 +31,15 @@ public class RemovePersonServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String id = request.getParameter("id");
-            if (id != null && !id.isEmpty()) {
-                ListPersons.removePerson(new Integer(id));
+            
+            if (request.getParameter("person_id") != null && request.getParameter("id") != null) {
+                
+                Integer contactId = new Integer(request.getParameter("id"));
+                Integer personId = new Integer(request.getParameter("person_id"));
+                ListPersons.getPerson(personId).getContacts().removeContact(contactId);
+                response.sendRedirect(request.getParameter("redirect_url"));
+                
+            } else {
                 response.sendRedirect("index.jsp");
             }
         } catch (IOException | NumberFormatException e) {

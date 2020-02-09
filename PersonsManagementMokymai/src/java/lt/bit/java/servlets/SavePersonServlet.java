@@ -8,6 +8,7 @@ package lt.bit.java.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ import lt.bit.java.datamodel.Person;
 /**
  *
  */
-@WebServlet(name="SavePerson", urlPatterns = {"/save"})
+@WebServlet(name="SavePerson", urlPatterns = {"/savePerson"})
 public class SavePersonServlet extends HttpServlet {
 
     /**
@@ -50,7 +51,17 @@ public class SavePersonServlet extends HttpServlet {
                 
                 Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birth_date"));  
                 
-                Person p = new Person();
+                // Pries nustatant naujas reiksmes objektui (Peson) patikriname ar toks objektas egzistuoja
+                // Jeigu tokio objekto pagal pateikta ID nerandame kuriame nauja objekta
+                // Kitu atveju uzkrauname objekta is saraso, kad neprarasti priskirtu adesu ir kontaktu
+                
+                Person p = null;
+                if (ListPersons.getPerson(id) != null) {
+                    p = ListPersons.getPerson(id);
+                } else {
+                    p = new Person();
+                }
+                
                 p.setId(id);
                 p.setFirstName(firstName);
                 p.setLastName(lastName);
@@ -58,12 +69,17 @@ public class SavePersonServlet extends HttpServlet {
                 p.setSalary(salary);
                 p.setBirthDate(birthDate);
                 
+                // esamu kontaktu ir adresu saugojimas
+                // kitu atveju saugodami person prarasime priskirtus adresus
+                p.setAddresses(p.getAddresses());
+                p.setContacts(p.getContacts());
+                
                 ListPersons.savePerson(p);
                 
                 response.sendRedirect("index.jsp");
             }
             
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException | ParseException e) {
             try (PrintWriter out = response.getWriter()) {
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");

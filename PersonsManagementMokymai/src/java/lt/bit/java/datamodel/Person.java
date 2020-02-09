@@ -26,7 +26,6 @@ public class Person {
             
     public Person() {
         this.id = ListPersons.getNextId();
-        
         this.addresses = new ListAddresses();
         this.contacts = new ListContacts();
     }

@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/DEV-WORKSPACE/SVN/PersonsManagementMokymai/web/index.jsp</file>
-            <file>file:/C:/DEV-WORKSPACE/SVN/PersonsManagementMokymai/web/addresses.jsp</file>
-            <file>file:/C:/DEV-WORKSPACE/SVN/PersonsManagementMokymai/web/contacts.jsp</file>
+            <file>file:/C:/DEV-WORKSPACE/JavaMokymai/PersonsManagementMokymai/src/java/lt/bit/java/servlets/SaveContact.java</file>
+            <file>file:/C:/DEV-WORKSPACE/JavaMokymai/PersonsManagementMokymai/src/java/lt/bit/java/servlets/RemoveAddress.java</file>
+            <file>file:/C:/DEV-WORKSPACE/JavaMokymai/PersonsManagementMokymai/src/java/lt/bit/java/servlets/RemoveContact.java</file>
+            <file>file:/C:/DEV-WORKSPACE/JavaMokymai/PersonsManagementMokymai/web/contacts.jsp</file>
+            <file>file:/C:/DEV-WORKSPACE/JavaMokymai/PersonsManagementMokymai/src/java/lt/bit/java/servlets/SaveAddress.java</file>
+            <file>file:/C:/DEV-WORKSPACE/JavaMokymai/PersonsManagementMokymai/web/index.jsp</file>
+            <file>file:/C:/DEV-WORKSPACE/JavaMokymai/PersonsManagementMokymai/web/form-contact.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -9,14 +9,12 @@ import lt.bit.java.datamodel.Address;
 import lt.bit.java.datamodel.Person;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import lt.bit.java.datamodel.Contact;
 
-/**
- *
- * @author adoma
- */
+
 public class ListPersons {
     
     private static final List<Person> PERSONS = new ArrayList<>();
@@ -80,7 +78,22 @@ public class ListPersons {
     }
     
     public static int getNextId() {
-        return PERSONS.size() + 1;
+        // OLD
+        // return PERSONS.size() + 1;
+        
+        // ieskom didziausio ID sarase
+        Person maxPerson = PERSONS
+                .stream()
+                .max(Comparator.comparing(Person::getId))
+                .orElse(null);
+        
+        // Jeigu lambda rado objekta graziname jo ID + 1;
+        if (maxPerson != null) {
+            return (int) maxPerson.getId() + 1;
+        } else {
+            // Jeigu nerado jokio objekto, kaip pvz irasant pirma irasa kada dar sarasa tuscias, graziname -1
+            return -1;
+        }
     }
     
     /***

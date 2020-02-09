@@ -92,7 +92,7 @@ public class ListPersons {
             return (int) maxPerson.getId() + 1;
         } else {
             // Jeigu nerado jokio objekto, kaip pvz irasant pirma irasa kada dar sarasa tuscias, graziname -1
-            return -1;
+            return 1;
         }
     }
     
@@ -103,13 +103,28 @@ public class ListPersons {
      * @return 
      */
     public static int getNextAddressId() {
-        int nextId = 0;
         
+        // listas surinkti visiems adresams is visu personu
+        ArrayList<Address> tempAddr = new ArrayList<>();
+        
+        // skaitome visus personus ir surenkame adresus
         for (Person p : PERSONS) {
-            nextId += p.getAddresses().getListItems().size();
+            tempAddr.addAll(p.getAddresses().getListItems());
         }
         
-        return nextId + 1;
+        // ieskome max id is listo aprasyto auksciau.
+        Address maxAddr = tempAddr
+                .stream()
+                .max(Comparator.comparing(Address::getId))
+                .orElse(null);
+        
+        if (maxAddr != null) {
+            return (int) maxAddr.getId() + 1;
+        } else {
+            // Jeigu nerado jokio objekto, kaip pvz irasant pirma irasa kada dar sarasa tuscias, graziname 1
+            return 1;
+        }
+        
     }
     
     /***

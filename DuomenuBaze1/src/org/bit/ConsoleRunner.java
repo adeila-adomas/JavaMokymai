@@ -5,16 +5,11 @@
  */
 package org.bit;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import org.bit.datamodel.Person;
 import org.bit.services.ApplicationActions;
 
 /**
@@ -55,7 +50,7 @@ public class ConsoleRunner {
     }
 
     public static void setAction(int choose)  {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/address_book?serverTimezone=UTC", "root", "Harley2ride!")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/address_book?serverTimezone=UTC", "root", "root")) {
             try {
                 switch (choose) {
                     case 0:

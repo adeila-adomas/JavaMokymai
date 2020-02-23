@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package duomenubaze1;
+package org.bit.koreguotini;
 
+import org.bit.datamodel.Person;
+import org.bit.datamodel.Address;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

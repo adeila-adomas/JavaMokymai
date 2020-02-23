@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package duomenubaze1;
+package org.bit;
 
+import org.bit.services.DB;
+import org.bit.datamodel.Person;
+import org.bit.datamodel.Address;
+import org.bit.datamodel.Contact;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
@@ -28,14 +32,14 @@ public class AddressBookConnectionRunner {
 
             System.out.println("Persons: ");
 
-            List<Person> personsList = AddressBookManager.getPersonsList(conn);
+            List<Person> personsList = DB.getPersonsList(conn);
             for (Person person : personsList) {
                 System.out.println(person.toString());
             }
 
             try {
                 System.out.println("Addresses: ");
-                List<Address> addressList = AddressBookManager.getAddressesList(conn);
+                List<Address> addressList = DB.getAddressesList(conn);
                 for (Address addr : addressList) {
                     System.out.println(addr.toString());
                 }
@@ -48,7 +52,7 @@ public class AddressBookConnectionRunner {
 
             try {
                 System.out.println("List Contacts: ");
-                List<Contact> contactsList = AddressBookManager.getContactsList(conn);
+                List<Contact> contactsList = DB.getContactsList(conn);
                 for (Contact contact : contactsList) {
                     System.out.println(contact.toString());
                 }
@@ -60,7 +64,7 @@ public class AddressBookConnectionRunner {
 
             try {
                 System.out.println("Person by ID: ");
-                Person p1 = AddressBookManager.getPerson(1, conn);
+                Person p1 = DB.getPerson(1, conn);
                 System.out.println(p1);
 
                 List<Address> listAddresses = p1.getAddresses(conn);
@@ -84,7 +88,7 @@ public class AddressBookConnectionRunner {
 
             try {
                 System.out.println("ADDRESS by ID: ");
-                Address addr1 = AddressBookManager.getAddress(1, conn);
+                Address addr1 = DB.getAddress(1, conn);
                 System.out.println(addr1);
             } catch (Exception e) {
                 System.err.println("Klaida: " + e.getMessage());
@@ -93,7 +97,7 @@ public class AddressBookConnectionRunner {
 
             try {
                 System.out.println("CONTACT by ID: ");
-                Contact contact = AddressBookManager.getContact(1, conn);
+                Contact contact = DB.getContact(1, conn);
                 System.out.println(contact);
             } catch (Exception e) {
                 System.err.println("Klaida: " + e.getMessage());

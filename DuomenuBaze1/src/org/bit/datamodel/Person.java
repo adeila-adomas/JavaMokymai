@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package duomenubaze1;
+package org.bit.datamodel;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bit.services.DB;
 
 public class Person {
     
@@ -64,7 +65,7 @@ public class Person {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AddressBookManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return listAddresses;
@@ -91,7 +92,7 @@ public class Person {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AddressBookManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return listContacts;

@@ -16,7 +16,7 @@ public class LambdaListReplaceTest {
 		list.add("2");
 		list.add("1");
 		
-		Stream<String> streamString = list.stream(); //.filter(c -> Integer.parseInt(c) > 0).findAny().map(c -> "no").orElse("yes");
+		Stream<String> streamString = list.stream(); 
 		
 		/*
 		list = streamString

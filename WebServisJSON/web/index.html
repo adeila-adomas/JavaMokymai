@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Jason write content</div>
+        <button onclick="getData();">GET data</button>
+        <a href="test">test</a>
+        <input id="id" type="number">
+        <button onclick="deletePerson()">Delete</button>
+        <button onclick="add()">ADD</button>
+        <script>
+            function getData() {
+                fetch("./test")
+                        .then(data => data.json())
+                        .then(data => {
+                            console.log(data);
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        });
+            }
+
+            function deletePerson() {
+                let idEl = document.getElementById("id");
+                //alert(idEl.value);
+                fetch("./rest/person/" + idEl.value, {
+                    method: "DELETE"
+                }).
+                        then(data => data.json()).
+                        then(data => {
+                            console.log(data);
+                        })
+            }
+
+
+            function add() {
+                let p = {
+                    firstName: "Json",
+                    lastName: "JSON",
+                    salary: 1256.55,
+                    birthDate: "1999-02-02"
+                };
+                fetch("./rest/person", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(p)
+                })
+                        .then(data => data.json())
+                        .then(data => {
+                            console.log(data);
+                        });
+            }
+
+
+        </script>
+    </body>
+</html>
